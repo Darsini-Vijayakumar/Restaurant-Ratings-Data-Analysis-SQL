@@ -285,10 +285,10 @@ JOIN (SELECT COUNT(*) AS total_count
 ON 1=1
 ORDER BY percent desc;
 
---52% of restaurants in Excellent and Good category were mid priced restaurants
+--52% of restaurants in Excellent and Good category were mid priced restaurants followed by 26% low priced restaurants
 --95% of restaurants in Excellent and Good category had 'Familiar' ambience
 --89% the restaurants were of Closed area, with excellent rated restaurants being only closed
---54% of restaurants in Excellent and Good category category had no smoking area
+--66% of restaurants in Excellent and Good category category had no smoking area
 --59% of restaurants served only one cuisine
 --For 27% of the restaurants, cuisine is not known. 15% had Mexican cuisine followed by Bar
 
