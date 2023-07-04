@@ -20,45 +20,61 @@ After establishing a good sense of each attribute, I proceeded with exploratory 
 
 **3.1. Cuisine**
 
-We broke down the apps by category and found that the Family and Game categories have the highest market prevalence. The Business, Tools and Medical apps are also catching up. We also checked how each category performed in terms of number of reviews, size and installation count. We found that the gaming category has the maximum number of reviews and install count but the family apps consume more space in the play store.
+Broke down the Cuisines of the restaurants and found that the data consits of restaurants with wide variety of cuisines, from regional to continental to fastfood chains and bakeries. 26% of these restaurants offer Mexican cuisine and 62% of the restaurants offer only one type of cuisine followed by 10% and 2% of the restaurants with and 2 and 3 types of cuisines respectively. Also we don't have cuisine information for 26% of the restaurants
 
 **3.2. Alchohol availability in Restaurants**
 
-We analysed the sizing distribution of the top-rated apps (rating greater than 4.5) and observed that most top-rated apps are optimally sized between ~2MB to ~40MB i.e., neither too light nor too bulky. We found that the Game and Family categories have the highest number of bulky apps. We also observed that despite this, these bulky apps are fairly highly rated indicating that they are bulky for a purpose. Majority of the paid apps that are highly rated have small sizes which implies that most paid apps are designed and developed to cater to specific functionalities and hence are not bulky. Users prefer to pay for apps that are light-weighted. A paid app that is bulky may not perform well in the market but it also depends on the category of the app.
+Analysed the 'Alcohol' serving category, to find 67% of the restaurants do not serve alcohol, 26% of restaurants serve Wine and Beer, and 7% of restaurants have full bar
 
 **3.3. Pricing**
 
-The initial intuition for pricing strategy for apps to be popular would be to make them free. That is confirmed by the data as free apps dominate the store at 92.6%, making it over 12.5 times their paid counterparts. It follows that cheaper apps are also more popular which is supported by the fact that 90% of paid apps are less than $10 and 80% of apps are less than $5. Categorically, the most expensive apps are Family and Medical apps which would suggest that people are willing to pay more for medical apps, possibly due to a belief in a reliability or highly specialized applications. When cleaning the data, one of the major outliers we found were useless apps priced over $250 which we considered ‘junk’ apps. The names of these apps were typically something to the effect of “I am rich” which would do nothing other than prove the user paid an exorbitant amount it. An interesting insight for app developers for games is that all of the games are within $20.
+On similar analysis with Pricing of the restaurants, 35% restaurants belong to low price category, 46% restaurants belong to medium price category, 19% restaurants belong to high price category. Therefore, 81% of these restaurants are under the afforable price range
 
 **3.4. Ambience**
 
-To answer the question of whether highly installed apps are rated better, we plotted the install count and rating. We saw that there was no pattern in apps that had installs less than 500 Million. However, for apps with installs greater than this threshold, the minimum rating rises to 3.7 out of 5. To confirm this, we bucketed the apps into bins based on number of installs and plotted the minimum rating for each bucket. We observed that the lowest rating for an app increases with the number of installs. We can say that popular apps are less likely to be rated badly.
+93% restaurants belong to Familiar category, 7% restaurants belong to Quiet category
 
-3.5. Rating Distribution
-The rating distribution revealed that most apps perform reasonably well with an average rating of 4.17. We broke down the average rating by category to check if any category performs exceedingly good or bad. We conducted a One-way Anova Test and confirmed that the average ratings across categories is statistically different. The Health and Fitness and Books and Reference produce the best apps with 50% apps having a rating greater than 4.5. Interestingly, half of the Dating apps have a rating lower than the average.
+**3.5. Rating Distribution**
 
-3.6. Basic Sentiment Analysis – User Reviews
-We plotted the fraction of positive, negative and neutral reviews for each category and observed that the Health and Fitness apps perform the best with more than 85% positive reviews. On the other hand, Game and Social apps have a higher fraction of negative reviews. We compared the reviews between free and paid apps and found that people are harsher towards free apps whereas users are more tolerant when they are paying for it.
+Our dataset consists of three ratings categories, Overall rating, Food rating and service rating each ranging from 0 to 2, with 0 being the lowest and 2 being highest. So for the ease of analysis, I bucketed the restaurants into three buckets as 'Bad' , 'Good' , 'Excellent' based on their ratings.
 
-3.7. Frequency of Words in Reviews
-We created a word cloud of commonly occurring words in positive and negative reviews and found that the words – “love”, “great” and “good” were the most commonly occurring words in the positive reviews. On the other hand, the negative words that were prevalent were “bad”, “hate” and “ads”. Our aim was to analyse the reviews and get a better idea of the common issues that people face with apps or the attributes that make an app popular. We extracted phrases from the reviews and observed that positive reviews had phrases like “user friendly”, “free version”, “works great” and “highly recommend”. The negative reviews contained phrases like “waste time”, “many ads”, “spend money” and “takes forever”. We can see that loading time and ads were one of the main concerns amongst users. On the other hand, usability is one of the reasons that users give positive reviews.
+**4. Data Analysis**
 
-4. Predictive Modelling
-We proceeded to predict the popularity of app based on its features and chose the install count as the measure of popularity. We split the number of installs into four buckets – Not so popular, Intermediate Popular, Popular and Extremely Popular, so that we have a classification problem at hand.
+Proceeded to analyse the restaurants in 'Excellent' and 'Good' bucket and their features.
 
-4.1. Feature Selection
-We plotted a Pearson Correlation Matrix which showed a moderate positive correlation exists between the number of reviews and the number of installs. Our initial analysis also revealed that the size of the app affects the rating. Most of the top-rated apps were sized between 2 Mb and 40 Mb. Intuitively, the number of reviews and size of the app would explain the majority of the popularity of the app. The rating distribution showed that categories had statistically different mean ratings which in turn contributes to the popularity. We decided to use the features - ‘Installs’, 'Reviews', 'Category', 'Content Rating', 'Type', 'Genres' and 'Size'. We dropped the features – Android Ver, Current Ver and Last Updated since these did not have any significant relationship with the install count.
+**4.1. Overall Ratings**
 
-4.2. Implementation
-We implemented three classification models to predict the popularity of the app, amongst which Random Forest with tuning gave us the best accuracy with 81.08 % accuracy. Logistic Regression – 58.67% accuracy Decision Tree Classifier – 76.10% accuracy Random Forest Classifier – 78.16% accuracy Random Forest with Hyperparameter tuning - 81.08% accuracy We used Randomized Search CV to loop over a set of random values for the parameters of the model. We ran the grid search and chose the optimal number of tress, number of features at each split, maximum number of levels and the method of selecting samples. Using these parameters, we predicted the popularity of the app on our test set and obtained an accuracy of 88.05%.
+15% of the restaurants fall under 'Excellent' bucket with ratings greater than 1.5, 48% of restaurants fall under 'Good' bucket with ratings between 1 and 1.5 and 38% of the restaurants fall under 'Bad' bucket with ratings less than 1
 
-5. Findings and Conclusion
-Developers should aim to keep the apps optimally sized (between 2 MB to 40 MB) to increase the likelihood of it being popular.
-Paid apps designed to fulfil specific functions tend to be small sized and are more likely to meet user expectations.
-Majority of the apps should be free. For apps with no ads, apps can be priced under $10.
-Free apps tend to outperform paid apps both in volume, install counts and ratings.
-There is a positive correlation between installs and ratings
-The category (Game) is a potential unsaturated space for app developers. Apps in this category tend to have high installs.
-Highly installed apps such as Communication, Productivity & Photography are not as highly rated indicating dissatisfaction among customers and potential untapped market segments.
-For paid apps, users review harshly.
-Basic sentiment analysis revealed some common issues like loading time and inconvenience with apps may contribute to a negative rating. Usability was one of the main reasons apps were rating positive.
+Analyzing the relationship among price, ambience, smoking area, cuisine and overall ratings led to the following findings
+
+52% of restaurants in Excellent and Good category were mid priced restaurants followed by 26% low priced restaurants, 95% of restaurants in Excellent and Good category had 'Familiar' ambience, 89% the restaurants were of Closed area, with excellent rated restaurants being only closed, 66% of restaurants in Excellent and Good category category had no smoking area, 59% of restaurants served only one cuisine, For 27% of the restaurants, cuisine is not known. 15% had Mexican cuisine followed by Bar
+
+**4.2. Food Ratings**
+
+12% of the restaurants fall under 'Excellent' bucket with food ratings greater than 1.5, 59% of restaurants fall under 'Good' bucket with food ratings between 1 and 1.5 and 29% of the restaurants fall under 'Bad' bucket with food ratings less than 1. This suggest that the authencity of the cuisine or the taste influences the customer rating
+
+Analyzing the relationship among smoking area, alcohol , cuisine and Food ratings led to the following findings
+
+62% of restaurants in Excellent and Good category were 'No Alcohol served' , 52% of restaurants in Excellent and Good category didnt not have smoking area , 64% the restaurants in Excellent and Good category served only one cuisine , For 25% of the restaurants, cusine is not known. 22% had Mexican cuisine followed by Bar
+
+**4.3. Service Ratings**
+
+10% of the restaurants fall under 'Excellent' bucket with food ratings greater than 1.5, 37% of restaurants fall under 'Good' bucket with food ratings between 1 and 1.5 and 53% of the restaurants fall under 'Bad' bucket with food ratings less than 1. This suggests that a considerable 53% of restaurants have poor services that jeopardizes the customer experience
+
+Analyzing the relation among parking, payment , other services and service ratings led to the following findings
+
+87% of restaurants in Excellent and Good category did not have any other services, 55% of restaurants had only one payment method whereas only 34% of restaurants in Excellent and Good category had only one payment method, 49% of restaurants in Excellent and Good category did not have any parking facility
+
+**4.4. Correlation**
+
+Performed correlation between ratings, cuisines and number of payment method available to find patterns and the results suggests that, the number of cuisines served does not strongly influence the restaurant rating and there is a tendency for higher-rated restaurants to offer a more variety of payment methods
+
+**5. Findings and Conclusion**
+   
+1. Pricing : Mid and Low priced restaurants attracted higher ratings from customers. Customers are looking for restaurants within the afforable price range for their dining experience
+2. Ambience and area : 95% and 89% of Familiar ambience and closed space restaurants received higher ratings, this suggest that customer prefer comfortable, welcoming and closed type atmosphere
+3. A considerable percentage 66% of restaurants in the 'Excellent' and 'Good' categories had no smoking area. This reflects the growing trend of providing smoke-free dining spaces to cater to customer preferences and health concerns.
+4. Cuisine: A significant proportion 59% of restaurants with higher ratings served only one cuisine. This highlights the importance of specialization and focusing on delivering high-quality dishes within a specific culinary genre.
+5. Unknown Cuisine: It is worth noting that for 27% of the restaurants, the cuisine information is not known. This suggests a need for better data collection and categorization in order to gain a comprehensive understanding of the restaurant landscape.
+6. 53% of restaurants had lower service ratings, this implies that restaurants should had more services to enhance customer experience
